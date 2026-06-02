@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Airport Flight Management System - Book, Check-in, and Board Flights">
+    <meta name="theme-color" content="#1a3a52">
+    <title>ACZ Flight Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">✈️</span>
+                <span class="logo-text">ACZ Airways</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#booking" class="nav-link" data-section="booking">Book Flight</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#checkin" class="nav-link" data-section="checkin">Check-in</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#boarding" class="nav-link" data-section="boarding">Boarding</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#flights" class="nav-link" data-section="flights">My Flights</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to ACZ Airways</h1>
+                <p>Your trusted partner for seamless air travel</p>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="section booking-section">
+            <div class="container">
+                <h2 class="section-title">Book Your Flight</h2>
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departure">Departure City *</label>
+                            <select id="departure" required>
+                                <option value="">Select departure city</option>
+                                <option value="NYC">New York (JFK)</option>
+                                <option value="LAX">Los Angeles (LAX)</option>
+                                <option value="ORD">Chicago (ORD)</option>
+                                <option value="ATL">Atlanta (ATL)</option>
+                                <option value="DFW">Dallas (DFW)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="arrival">Arrival City *</label>
+                            <select id="arrival" required>
+                                <option value="">Select arrival city</option>
+                                <option value="NYC">New York (JFK)</option>
+                                <option value="LAX">Los Angeles (LAX)</option>
+                                <option value="ORD">Chicago (ORD)</option>
+                                <option value="ATL">Atlanta (ATL)</option>
+                                <option value="DFW">Dallas (DFW)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departureDate">Departure Date *</label>
+                            <input type="date" id="departureDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passengers">Number of Passengers *</label>
+                            <input type="number" id="passengers" min="1" max="6" value="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passengerName">Full Name *</label>
+                            <input type="text" id="passengerName" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passengerEmail">Email Address *</label>
+                            <input type="email" id="passengerEmail" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passengerPhone">Phone Number *</label>
+                            <input type="tel" id="passengerPhone" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="classType">Class *</label>
+                            <select id="classType" required>
+                                <option value="Economy">Economy</option>
+                                <option value="Business">Business</option>
+                                <option value="First">First Class</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Search & Book Flight</button>
+                </form>
+
+                <!-- Available Flights Display -->
+                <div id="flightsDisplay" class="flights-display hidden">
+                    <h3>Available Flights</h3>
+                    <div id="flightsList" class="flights-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Check-in Section -->
+        <section id="checkin" class="section checkin-section">
+            <div class="container">
+                <h2 class="section-title">Check-in for Your Flight</h2>
+                <form id="checkinForm" class="checkin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingReference">Booking Reference *</label>
+                            <input type="text" id="bookingReference" placeholder="e.g., ACZ1234" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkinEmail">Email Address *</label>
+                            <input type="email" id="checkinEmail" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Check-in</button>
+                </form>
+
+                <!-- Check-in Status Display -->
+                <div id="checkinStatus" class="checkin-status hidden"></div>
+            </div>
+        </section>
+
+        <!-- Boarding Section -->
+        <section id="boarding" class="section boarding-section">
+            <div class="container">
+                <h2 class="section-title">Flight Boarding Status</h2>
+                <div class="boarding-info">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="boardingFlightNumber">Flight Number *</label>
+                        <input type="text" id="boardingFlightNumber" placeholder="e.g., ACZ101" required>
+                        <button type="button" class="btn btn-secondary" onclick="loadBoardingStatus()">Load Status</button>
+                    </div>
+                </div>
+                <div id="boardingDisplay" class="boarding-display hidden">
+                    <div id="boardingContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Flights Section -->
+        <section id="flights" class="section myflights-section">
+            <div class="container">
+                <h2 class="section-title">My Bookings</h2>
+                <div class="flights-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="confirmed">Confirmed</button>
+                    <button class="filter-btn" data-filter="checkedin">Checked-in</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+                <div id="myFlightsList" class="my-flights-list"></div>
+                <div id="noFlights" class="no-flights">No bookings found. Start by booking a flight!</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 ACZ Airways. All rights reserved. | Secure Booking System</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Booking Confirmation -->
+    <div id="confirmationModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
